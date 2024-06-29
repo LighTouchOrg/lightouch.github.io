@@ -37,7 +37,7 @@ a {
     text-decoration: none;
 }
 
-#superTitle, span {
+#superTitle, #superTitle span {
     height: 100%;
     width: 100%;
     display: flex;
@@ -53,7 +53,7 @@ a {
 }
 
 @media screen and (max-width: 1024px) {
-    #superTitle, span {
+    #superTitle, #superTitle span {
         font-size: 18vw;
     }
 }
