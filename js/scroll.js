@@ -1,13 +1,13 @@
-// make appear buttons when scrolling
 $(document).ready(function() {
     const MAX_SCROLL = 20;
     let scrollPosition = 0;
-
+    let startY = 0;
+    
     function checkVisibility() {
         const windowHeight = $(window).height();
-
+        
         $('.home-title-btn').each(function(index) {
-
+            // make buttons appear when scrolling
             if (scrollPosition >= 20) {
                 $(this).addClass('visible');
             } else {
@@ -32,12 +32,17 @@ $(document).ready(function() {
                     scrollPosition -= 20;
                 }
                 break;
+            case 'touchstart':
+                startY = event.originalEvent.touches[0].clientY; // Store starting Y position
+                break;
             case 'touchmove':
-                if (event.originalEvent.touches[0].clientY > 0 && scrollPosition < MAX_SCROLL) {
+                const currentY = event.originalEvent.touches[0].clientY;
+                if (currentY < startY && scrollPosition < MAX_SCROLL) { // Moving up
                     scrollPosition += 20;
-                } else if (event.originalEvent.touches[0].clientY < 0) {
+                } else if (currentY > startY && scrollPosition > 0) { // Moving down
                     scrollPosition -= 20;
                 }
+                startY = currentY; // Update startY to the current position for continuous scrolling
                 break;
         }
 
@@ -48,6 +53,7 @@ $(document).ready(function() {
 
     $(window).on('wheel', simulateScroll);
     $(window).on('keydown', simulateScroll);
+    $(window).on('touchstart', simulateScroll);
     $(window).on('touchmove', simulateScroll);
 
     checkVisibility(); // Vérifiez la visibilité au chargement initial
