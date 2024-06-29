@@ -17,18 +17,28 @@ $(document).ready(function() {
     }
 
     function simulateScroll(event) {
-        if (event.type === 'wheel') {
-            if (event.originalEvent.deltaY > 0 && scrollPosition < MAX_SCROLL) {
-                scrollPosition += 20;
-            } else if (event.originalEvent.deltaY < 0) {
-                scrollPosition -= 20;
-            }
-        } else if (event.type === 'keydown') {
-            if (event.key === 'ArrowDown' && scrollPosition < MAX_SCROLL) {
-                scrollPosition += 20;
-            } else if (event.key === 'ArrowUp') {
-                scrollPosition -= 20;
-            }
+        switch (event.type) {
+            case 'wheel':
+                if (event.originalEvent.deltaY > 0 && scrollPosition < MAX_SCROLL) {
+                    scrollPosition += 20;
+                } else if (event.originalEvent.deltaY < 0) {
+                    scrollPosition -= 20;
+                }
+                break;
+            case 'keydown':
+                if (event.key === 'ArrowDown' && scrollPosition < MAX_SCROLL) {
+                    scrollPosition += 20;
+                } else if (event.key === 'ArrowUp') {
+                    scrollPosition -= 20;
+                }
+                break;
+            case 'touchmove':
+                if (event.originalEvent.touches[0].clientY > 0 && scrollPosition < MAX_SCROLL) {
+                    scrollPosition += 20;
+                } else if (event.originalEvent.touches[0].clientY < 0) {
+                    scrollPosition -= 20;
+                }
+                break;
         }
 
         if (scrollPosition < 0) scrollPosition = 0;
@@ -38,6 +48,7 @@ $(document).ready(function() {
 
     $(window).on('wheel', simulateScroll);
     $(window).on('keydown', simulateScroll);
+    $(window).on('touchmove', simulateScroll);
 
     checkVisibility(); // Vérifiez la visibilité au chargement initial
 });
