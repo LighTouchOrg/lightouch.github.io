@@ -52,6 +52,12 @@ a {
     animation: drop 1s forwards;
 }
 
+@media screen and (max-width: 1024px) {
+    #superTitle, span {
+        font-size: 18vw;
+    }
+}
+
 #superTitle span {
     width: fit-content;
     transform: translateY(-4rem);
