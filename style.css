@@ -93,9 +93,22 @@ a {
     transform: translateX(0);
 }
 
+.home-title-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .home-title-buttons {
+        flex-direction: column;
+    }
+}
+
 .home-title-btn {
     border: none;
-    margin: 0 1rem;
     padding: .5rem 1rem;
     height: auto;
     width: fit-content;
