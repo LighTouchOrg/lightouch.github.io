@@ -6,13 +6,18 @@ $(document).ready(function() {
     function checkVisibility() {
         const windowHeight = $(window).height();
         
-        $('.home-title-btn').each(function(index) {
-            // make buttons appear when scrolling
-            if (scrollPosition >= 20) {
-                $(this).addClass('visible');
-            } else {
-                $(this).removeClass('visible');
-            }
+        $($('.home-title-btn').toArray().reverse()).each(function(index) {
+            // Calculate delay based on index, e.g., first button has no delay, second has 100ms, third has 200ms, etc.
+            var delay = index * 100; // Adjust the 100ms to control the speed of the sequence
+
+            setTimeout(() => {
+                // make buttons appear when scrolling with a delay
+                if (scrollPosition >= 20) {
+                    $(this).addClass('visible');
+                } else {
+                    $(this).removeClass('visible');
+                }
+            }, delay);
         });
     }
 
