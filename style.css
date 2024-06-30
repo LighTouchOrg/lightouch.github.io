@@ -58,7 +58,7 @@ a {
     opacity: 0;
     animation: drop 1s forwards;
 
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .home-title-animation span {
@@ -91,6 +91,7 @@ a {
 .visible {
     opacity: 1;
     transform: translateX(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .home-title-buttons {
@@ -98,7 +99,7 @@ a {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 @media screen and (max-width: 1024px) {
@@ -108,11 +109,21 @@ a {
 }
 
 .home-title-btn {
-    border: none;
-    padding: .5rem 1rem;
     height: auto;
     width: fit-content;
+    border: 1px solid #301d55;
+    padding: .5rem 1.5rem;
     border-radius: 10px;
     background-color: #e6a733;
-    color: #000
+    font-size: x-large;
+    color: #301d55;
+    cursor: pointer;
+}
+
+.home-title-btn:hover,
+.home-title-btn:focus {
+    box-shadow: inset 15rem 0 0 0 #301d55;
+    color: #e6a733;
+    border: 1px solid #e6a733;
+    transition: box-shadow 0.3s linear, color 0.3s linear, border 0.3s linear;
 }
