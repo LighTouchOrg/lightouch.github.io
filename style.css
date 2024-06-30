@@ -9,6 +9,7 @@ html {
     color: #000;
     font-size: large;
     font-weight: 400;
+    font-family: 'Tahoma', sans-serif;
 }
 
 body {
@@ -52,6 +53,7 @@ a {
     justify-content: center;
     align-items: center;
     font-size: 10rem;
+    font-family: 'Times New Roman', Times, serif;
     color: transparent;
     -webkit-text-stroke: 3px #fff;
     transform: translateY(-4rem);
@@ -63,6 +65,7 @@ a {
 
 .home-title-animation span {
     font-size: 10rem;
+    font-family: 'Times New Roman', Times, serif;
     color: transparent;
     transform: translateY(-4rem);
     opacity: 0;

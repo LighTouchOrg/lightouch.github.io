@@ -14,8 +14,10 @@ $(document).ready(function() {
                 // make buttons appear when scrolling with a delay
                 if (scrollPosition >= 20) {
                     $(this).addClass('visible');
+                    $(this).removeClass('hidden');
                 } else {
                     $(this).removeClass('visible');
+                    $(this).addClass('hidden');
                 }
             }, delay);
         });
