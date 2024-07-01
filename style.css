@@ -144,7 +144,11 @@ a {
     transition: box-shadow 0.3s linear, color 0.3s linear, border 0.3s linear;
 }
 
+.arrow {
+    transform: rotate(0deg);
+    transition: transform 0.3s linear;
+}
+
 .rotate {
     transform: rotate(180deg);
-    transition: transform 0.3s linear;
 }
