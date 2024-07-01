@@ -1,14 +1,16 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const MAX_SCROLL = 20;
     let scrollPosition = 0;
     let startY = 0;
 
     function checkVisibility() {
-        const windowHeight = $(window).height();
+        let buttons = $('.home-title-btn').toArray();
 
-        $($('.home-title-btn').toArray().reverse()).each(function(index) {
+        if (scrollPosition >= 20) buttons = buttons.reverse();
+
+        $(buttons).each(function(index) {
             // Calculate delay based on index, e.g., first button has no delay, second has 100ms, third has 200ms, etc.
-            var delay = index * 100; // Adjust the 100ms to control the speed of the sequence
+            var delay = index * 150; // Adjust the 100ms to control the speed of the sequence
 
             setTimeout(() => {
                 // make buttons appear when scrolling with a delay
