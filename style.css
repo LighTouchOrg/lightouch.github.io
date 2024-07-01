@@ -17,6 +17,11 @@ body {
     width: 100%;
     background-color: #301d55;
     overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 #navbar {
@@ -131,4 +136,9 @@ a {
     color: #e6a733;
     border: 1px solid #e6a733;
     transition: box-shadow 0.3s linear, color 0.3s linear, border 0.3s linear;
+}
+
+.rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s linear;
 }

@@ -1,12 +1,16 @@
 $(document).ready(function () {
-    const MAX_SCROLL = 20;
+    const MAX_SCROLL = 2000000000;
     let scrollPosition = 0;
     let startY = 0;
 
     function checkVisibility() {
         let buttons = $('.home-title-btn').toArray();
 
+        if (scrollPosition > 0) $('.arrow').addClass('rotate');
+        else $('.arrow').removeClass('rotate');
+
         if (scrollPosition >= 20) buttons = buttons.reverse();
+        console.log(scrollPosition);
 
         $(buttons).each(function(index) {
             // Calculate delay based on index, e.g., first button has no delay, second has 100ms, third has 200ms, etc.
@@ -23,6 +27,12 @@ $(document).ready(function () {
                 }
             }, delay);
         });
+
+        if (scrollPosition >= 1500) {
+            $('#projectSection').css('display', 'block');
+        } else {
+            $('#projectSection').css('display', 'none');
+        }
     }
 
     function simulateScroll(event) {
