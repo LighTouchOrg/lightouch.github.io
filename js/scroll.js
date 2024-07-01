@@ -2,10 +2,10 @@ $(document).ready(function() {
     const MAX_SCROLL = 20;
     let scrollPosition = 0;
     let startY = 0;
-    
+
     function checkVisibility() {
         const windowHeight = $(window).height();
-        
+
         $($('.home-title-btn').toArray().reverse()).each(function(index) {
             // Calculate delay based on index, e.g., first button has no delay, second has 100ms, third has 200ms, etc.
             var delay = index * 100; // Adjust the 100ms to control the speed of the sequence
@@ -63,5 +63,5 @@ $(document).ready(function() {
     $(window).on('touchstart', simulateScroll);
     $(window).on('touchmove', simulateScroll);
 
-    checkVisibility(); // Vérifiez la visibilité au chargement initial
+    checkVisibility(); // check visibility on page load
 });
