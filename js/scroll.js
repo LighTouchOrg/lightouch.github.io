@@ -1,14 +1,18 @@
-const MAX_SCROLL = 6000;
+const MAX_SCROLL = 1000;
+const BUTTONS_Y = 15;
+const PAGE_1_Y = 250;
+const PAGE_1_END_Y = 1000;
+
 let scrollPosition = 0;
 let startY = 0;
 
 function checkVisibility() {
     let buttons = $('.home-title-btn').toArray();
 
-    if (scrollPosition > 1300) $('.arrow').addClass('rotate');
+    if (scrollPosition >= PAGE_1_END_Y) $('.arrow').addClass('rotate');
     else $('.arrow').removeClass('rotate');
 
-    if (scrollPosition >= 20) buttons = buttons.reverse();
+    if (scrollPosition >= BUTTONS_Y) buttons = buttons.reverse();
     console.log(scrollPosition);
 
     $(buttons).each(function(index) {
@@ -17,7 +21,7 @@ function checkVisibility() {
 
         setTimeout(() => {
             // make buttons appear when scrolling with a delay
-            if (scrollPosition >= 20) {
+            if (scrollPosition >= BUTTONS_Y) {
                 $(this).addClass('visible');
                 $(this).removeClass('hidden');
             } else {
@@ -27,7 +31,7 @@ function checkVisibility() {
         }, delay);
     });
 
-    if (scrollPosition >= 1300) {
+    if (scrollPosition >= PAGE_1_Y) {
         $('#projectSection').css('display', 'block');
     } else {
         $('#projectSection').css('display', 'none');
@@ -37,34 +41,36 @@ function checkVisibility() {
 function simulateScroll(event) {
     switch (event.type) {
         case 'wheel':
-            if (event.originalEvent.deltaY > 0 && scrollPosition < MAX_SCROLL) {
-                scrollPosition += 20;
-            } else if (event.originalEvent.deltaY < 0) {
-                scrollPosition -= 20;
+            // Directly setting based on deltaY might not be practical for continuous events like 'wheel'
+            // Consider using a function to calculate the target position based on deltaY
+            if (scrollPosition < PAGE_1_Y) {
+                scrollPosition += event.originalEvent.deltaY;
+            } else {
+                scrollPosition = PAGE_1_Y + window.scrollY;
             }
             break;
         case 'keydown':
-            if (event.key === 'ArrowDown' && scrollPosition < MAX_SCROLL) {
-                scrollPosition += 20;
+            // Directly set to next or previous section
+            if (event.key === 'ArrowDown') {
+                scrollToNextSection();
             } else if (event.key === 'ArrowUp') {
-                scrollPosition -= 20;
+                scrollToPreviousSection();
             }
             break;
         case 'touchstart':
-            startY = event.originalEvent.touches[0].clientY; // Store starting Y position
+            startY = event.originalEvent.touches[0].clientY;
             break;
         case 'touchmove':
             const currentY = event.originalEvent.touches[0].clientY;
-            if (currentY < startY && scrollPosition < MAX_SCROLL) { // Moving up
-                scrollPosition += 20;
-            } else if (currentY > startY && scrollPosition > 0) { // Moving down
-                scrollPosition -= 20;
-            }
-            startY = currentY; // Update startY to the current position for continuous scrolling
+            // Directly set scrollPosition based on touch movement
+            scrollPosition = startY - currentY + initialScrollPosition; // initialScrollPosition is where the scroll started
+            startY = currentY; // Update startY for continuous scrolling
             break;
     }
 
+    // Ensure scrollPosition is within bounds
     if (scrollPosition < 0) scrollPosition = 0;
+    if (scrollPosition > MAX_SCROLL) scrollPosition = MAX_SCROLL;
 
     checkVisibility();
 }
@@ -76,6 +82,33 @@ function scrollTo(position) {
     checkVisibility();
 }
 
+function scrollToNextSection() {
+    if (scrollPosition < BUTTONS_Y) scrollPosition = BUTTONS_Y;
+    else if (scrollPosition < PAGE_1_END_Y) scrollPosition = PAGE_1_END_Y;
+    else if (scrollPosition >= PAGE_1_END_Y) scrollPosition = BUTTONS_Y;
+    else scrollPosition = 0;
+    scrollTo(scrollPosition);
+}
+
+function scrollToPreviousSection() {
+    if (scrollPosition <= BUTTONS_Y) scrollPosition = 0;
+    else if (scrollPosition <= PAGE_1_END_Y) scrollPosition = BUTTONS_Y;
+    else if (scrollPosition > PAGE_1_END_Y) scrollPosition = PAGE_1_END_Y;
+    scrollTo(scrollPosition);
+}
+
+function scrollToSection(page) {
+    switch (page) {
+        case 1:
+            scrollPosition = PAGE_1_END_Y;
+            break;
+    }
+    // unfocus all buttons & as
+    $('button').blur();
+    $('a').blur();
+    scrollTo(scrollPosition);
+}
+
 $(document).ready(function () {
     $(window).on('wheel', simulateScroll);
     $(window).on('keydown', simulateScroll);
@@ -84,10 +117,3 @@ $(document).ready(function () {
 
     checkVisibility(); // check visibility on page load
 });
-
-function scrollToNextSection() {
-    if (scrollPosition < 20) scrollPosition = 20;
-    else if (scrollPosition < 6000) scrollPosition = 6000;
-    else scrollPosition = 0;
-    scrollTo(scrollPosition);
-}
