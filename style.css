@@ -145,8 +145,16 @@ a {
 }
 
 .arrow {
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    bottom: calc(10% - 44px);
+    left: calc(6% - 44px);
+    padding: 22px 24px;
+    border-radius: 50%;
     transform: rotate(0deg);
     transition: transform 0.3s linear;
+    cursor: pointer;
 }
 
 .rotate {
