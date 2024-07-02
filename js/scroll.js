@@ -1,6 +1,6 @@
 const MAX_SCROLL = 1000;
 const BUTTONS_Y = 15;
-const PAGE_1_Y = 250;
+const PAGE_1_Y = 500;
 const PAGE_1_END_Y = 1000;
 
 let scrollPosition = 0;
@@ -43,7 +43,7 @@ function simulateScroll(event) {
         case 'wheel':
             // Directly setting based on deltaY might not be practical for continuous events like 'wheel'
             // Consider using a function to calculate the target position based on deltaY
-            if (scrollPosition < PAGE_1_Y) {
+            if (scrollPosition <= PAGE_1_Y) {
                 scrollPosition += event.originalEvent.deltaY;
             } else {
                 scrollPosition = PAGE_1_Y + window.scrollY;
