@@ -70,9 +70,10 @@ function simulateScroll(event) {
 }
 
 function scrollTo(position) {
-    $('html, body').animate({
+    $('html, body').stop().animate({
         scrollTop: position
     }, position / 2, 'linear');
+    checkVisibility();
 }
 
 $(document).ready(function () {
@@ -86,8 +87,7 @@ $(document).ready(function () {
 
 function scrollToNextSection() {
     if (scrollPosition < 20) scrollPosition = 20;
-    else if (scrollPosition < 1300) scrollPosition = 6000;
+    else if (scrollPosition < 6000) scrollPosition = 6000;
     else scrollPosition = 0;
-    checkVisibility();
     scrollTo(scrollPosition);
 }
