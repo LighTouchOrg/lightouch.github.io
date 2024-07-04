@@ -12,10 +12,22 @@ html::-webkit-scrollbar {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #000;
     font-size: large;
     font-weight: 400;
     font-family: 'Tahoma', sans-serif;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+    font-size: 10rem;
+}
+
+h2 {
+    font-size: 6rem;
 }
 
 body {
@@ -28,6 +40,10 @@ body {
     ::-webkit-scrollbar {
         display: none;
     }
+}
+
+p {
+    font-size: x-large;
 }
 
 #navbar {
@@ -63,7 +79,6 @@ a {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 10rem;
     font-family: 'Times New Roman', Times, serif;
     color: transparent;
     -webkit-text-stroke: 3px #fff;
@@ -152,11 +167,29 @@ a {
     left: calc(6% - 44px);
     padding: 22px 24px;
     border-radius: 50%;
-    transform: rotate(0deg);
-    transition: transform 0.3s linear;
     cursor: pointer;
+    opacity: 1;
+    transition: visibility 0.6s ease-out, opacity 0.5s ease-in-out; /* Smooth transition for opacity */
 }
 
-.rotate {
-    transform: rotate(180deg);
+.arrow-hidden {
+    opacity: 0;
+    cursor: default;
+    visibility: hidden;
+}
+
+.section {
+    height: 100%;
+    display: flex;
+    padding: 3rem 8rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.section p {
+    margin-top: 1rem;
+    text-wrap: balance;
+    text-wrap: pretty; /* Not supported in all browsers */
 }

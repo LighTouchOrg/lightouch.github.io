@@ -9,8 +9,8 @@ let startY = 0;
 function checkVisibility() {
     let buttons = $('.home-title-btn').toArray();
 
-    if (scrollPosition >= PAGE_1_END_Y) $('.arrow').addClass('rotate');
-    else $('.arrow').removeClass('rotate');
+    if (scrollPosition >= PAGE_1_END_Y) $('.arrow').addClass('arrow-hidden');
+    else $('.arrow').removeClass('arrow-hidden');
 
     if (scrollPosition >= BUTTONS_Y) buttons = buttons.reverse();
     console.log(scrollPosition);
@@ -32,7 +32,7 @@ function checkVisibility() {
     });
 
     if (scrollPosition >= PAGE_1_Y) {
-        $('#projectSection').css('display', 'block');
+        $('#projectSection').css('display', 'flex');
     } else {
         $('#projectSection').css('display', 'none');
     }
