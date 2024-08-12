@@ -33,8 +33,10 @@ function checkVisibility() {
 
     if (scrollPosition >= PAGE_1_Y) {
         $('#projectSection').css('display', 'flex');
+        $('#projectSection h2').addClass('text-animation');
     } else {
         $('#projectSection').css('display', 'none');
+        $('#projectSection h2').removeClass('text-animation');
     }
 }
 
@@ -109,7 +111,39 @@ function scrollToSection(page) {
     scrollTo(scrollPosition);
 }
 
+function easteregg() {
+    let b_is_pressed = false;
+    let f_is_pressed = false;
+    let a_is_pressed = false;
+    let n_is_pressed = false;
+    let j_is_pressed = false;
+
+    $(document).keydown(function (e) {
+        if (e.key === 'b') {
+            b_is_pressed = true;
+        } else if (e.key === 'f') {
+            f_is_pressed = true;
+        } else if (e.key === 'a') {
+            a_is_pressed = true;
+        } else if (e.key === 'n') {
+            n_is_pressed = true;
+        } else if (e.key === 'j') {
+            j_is_pressed = true;
+        }
+
+        if (b_is_pressed && f_is_pressed && a_is_pressed && n_is_pressed && j_is_pressed) {
+            window.open('https://github.com/LighTouchOrg', '_blank');
+            b_is_pressed = false;
+            f_is_pressed = false;
+            a_is_pressed = false;
+            n_is_pressed = false;
+            j_is_pressed = false;
+        }
+    });
+}
+
 $(document).ready(function () {
+    easteregg(); // easter egg pour le fun
     $(window).on('wheel', simulateScroll);
     $(window).on('keydown', simulateScroll);
     $(window).on('touchstart', simulateScroll);

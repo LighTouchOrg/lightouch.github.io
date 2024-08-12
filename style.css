@@ -31,9 +31,9 @@ h2 {
 }
 
 body {
-    height: 100%;
+    height: 100vh;
     width: 100%;
-    background-color: #301d55;
+    background-color: #fff7eb;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -81,7 +81,7 @@ a {
     align-items: center;
     font-family: 'Times New Roman', Times, serif;
     color: transparent;
-    -webkit-text-stroke: 3px #fff;
+    -webkit-text-stroke: 3px #301d55;
     transform: translateY(-4rem);
     opacity: 0;
     animation: drop 1s forwards;
@@ -145,7 +145,7 @@ a {
     border: 1px solid #301d55;
     padding: .5rem 1.5rem;
     border-radius: 10px;
-    background-color: #e6a733;
+    background-color: transparent;
     font-size: x-large;
     color: #301d55;
     cursor: pointer;
@@ -154,8 +154,8 @@ a {
 .home-title-btn:hover,
 .home-title-btn:focus {
     box-shadow: inset 15rem 0 0 0 #301d55;
-    color: #e6a733;
-    border: 1px solid #e6a733;
+    color: #fff;
+    border: 1px solid #301d55;
     transition: box-shadow 0.3s linear, color 0.3s linear, border 0.3s linear;
 }
 
@@ -192,4 +192,9 @@ a {
     margin-top: 1rem;
     text-wrap: balance;
     text-wrap: pretty; /* Not supported in all browsers */
+}
+
+* .text-animation {
+    transform: translateY(-4rem);
+    animation: drop 2s forwards;
 }
