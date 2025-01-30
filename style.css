@@ -30,6 +30,16 @@ h2 {
     font-size: 6rem;
 }
 
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 8rem;
+    }
+    
+    h2 {
+        font-size: 4rem;
+    }
+}
+
 body {
     height: 100vh;
     width: 100%;
@@ -178,6 +188,13 @@ a {
     visibility: hidden;
 }
 
+@media screen and (max-width: 1024px) {
+    .arrow {
+        bottom: 0;
+        left: 0;
+    }
+}
+
 .section {
     height: 100%;
     display: flex;
@@ -192,6 +209,12 @@ a {
     margin-top: 1rem;
     text-wrap: balance;
     text-wrap: pretty; /* Not supported in all browsers */
+}
+
+@media screen and (max-width: 1024px) {
+    .section {
+        padding: 3rem 2rem;
+    }
 }
 
 * .text-animation {
