@@ -1,7 +1,9 @@
-const MAX_SCROLL = 1000;
+const MAX_SCROLL = 2000;
 const BUTTONS_Y = 15;
 const PAGE_1_Y = 500;
 const PAGE_1_END_Y = 1000;
+const PAGE_2_Y = 1500;
+const PAGE_2_END_Y = 2000;
 
 let scrollPosition = 0;
 let startY = 0;
@@ -9,11 +11,10 @@ let startY = 0;
 function checkVisibility() {
     let buttons = $('.home-title-btn').toArray();
 
-    if (scrollPosition >= PAGE_1_END_Y) $('.arrow').addClass('arrow-hidden');
-    else $('.arrow').removeClass('arrow-hidden');
+    if (scrollPosition >= PAGE_2_END_Y) $('.arrow').addClass('arrow-turned');
+    else $('.arrow').removeClass('arrow-turned');
 
     if (scrollPosition >= BUTTONS_Y) buttons = buttons.reverse();
-    console.log(scrollPosition);
 
     $(buttons).each(function(index) {
         // Calculate delay based on index, e.g., first button has no delay, second has 100ms, third has 200ms, etc.
@@ -31,12 +32,17 @@ function checkVisibility() {
         }, delay);
     });
 
-    if (scrollPosition >= PAGE_1_Y) {
+    if (scrollPosition >= PAGE_2_Y) {
+        $('#aboutSection').css('display', 'flex');
+        $('#aboutSection h2').addClass('text-animation');
+    } else if (scrollPosition >= PAGE_1_Y) {
         $('#projectSection').css('display', 'flex');
         $('#projectSection h2').addClass('text-animation');
     } else {
         $('#projectSection').css('display', 'none');
         $('#projectSection h2').removeClass('text-animation');
+        $('#aboutSection').css('display', 'none');
+        $('#aboutSection h2').removeClass('text-animation');
     }
 }
 
@@ -47,6 +53,8 @@ function simulateScroll(event) {
             // Consider using a function to calculate the target position based on deltaY
             if (scrollPosition <= PAGE_1_Y) {
                 scrollPosition += event.originalEvent.deltaY;
+            } else if (scrollPosition <= PAGE_2_Y) {
+                scrollPosition = PAGE_1_END_Y + window.scrollY;
             } else {
                 scrollPosition = PAGE_1_Y + window.scrollY;
             }
@@ -77,38 +85,46 @@ function simulateScroll(event) {
     checkVisibility();
 }
 
-function scrollTo(position) {
+function scrollTo(position, original=0) {
     $('html, body').stop().animate({
         scrollTop: position
-    }, position / 2, 'linear');
+    }, (position - original) / 2, 'linear');
     checkVisibility();
 }
 
 function scrollToNextSection() {
+    let original = scrollPosition;
     if (scrollPosition < BUTTONS_Y) scrollPosition = BUTTONS_Y;
     else if (scrollPosition < PAGE_1_END_Y) scrollPosition = PAGE_1_END_Y;
-    else if (scrollPosition >= PAGE_1_END_Y) scrollPosition = BUTTONS_Y;
+    else if (scrollPosition < PAGE_2_END_Y) scrollPosition = PAGE_2_END_Y;
+    else if (scrollPosition >= PAGE_2_END_Y) scrollPosition = BUTTONS_Y;
     else scrollPosition = 0;
-    scrollTo(scrollPosition);
+    scrollTo(scrollPosition, original);
 }
 
 function scrollToPreviousSection() {
+    let original = scrollPosition;
     if (scrollPosition <= BUTTONS_Y) scrollPosition = 0;
     else if (scrollPosition <= PAGE_1_END_Y) scrollPosition = BUTTONS_Y;
-    else if (scrollPosition > PAGE_1_END_Y) scrollPosition = PAGE_1_END_Y;
-    scrollTo(scrollPosition);
+    else if (scrollPosition <= PAGE_2_END_Y) scrollPosition = PAGE_1_END_Y;
+    else if (scrollPosition > PAGE_2_END_Y) scrollPosition = PAGE_2_END_Y;
+    scrollTo(scrollPosition, original);
 }
 
 function scrollToSection(page) {
+    original = scrollPosition;
     switch (page) {
         case 1:
             scrollPosition = PAGE_1_END_Y;
+            break;
+        case 2:
+            scrollPosition = PAGE_2_END_Y;
             break;
     }
     // unfocus all buttons & as
     $('button').blur();
     $('a').blur();
-    scrollTo(scrollPosition);
+    scrollTo(scrollPosition, original);
 }
 
 function easteregg() {
