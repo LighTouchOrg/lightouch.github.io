@@ -1,67 +1,95 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <title>LighTouch</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="" />
-        <link rel="icon" href="img/favicon.ico">
-        <link rel="stylesheet" href="style.css" />
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="js/scroll.js"></script>
-    </head>
 
-    <body>
-        <div class="arrow" onclick="scrollToNextSection()">
-            <!-- little arrow svg -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#301d55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down" width="40" height="40">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <polyline points="19 12 12 19 5 12"></polyline>
-            </svg>
+<head>
+    <meta charset="UTF-8" />
+    <title>LighTouch</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/scroll.js"></script>
+</head>
+
+<body>
+    <div class="arrow" onclick="scrollToNextSection()">
+        <!-- little arrow svg -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#301d55" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down" width="40" height="40">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+    </div>
+    <div class="home-title">
+        <h1 class="home-title-animation">
+            Ligh<span>Touch</span>
+        </h1>
+        <div class="home-title-buttons">
+            <a class="hidden home-title-btn" href="#" onclick="scrollToSection(page=1)">Le projet</a>
+            <a class="hidden home-title-btn" href="#" onclick="scrollToSection(page=2)">Qui sommes-nous ?</a>
+            <a class="hidden home-title-btn" href="#" onclick="scrollToSection(page=3)">Contact</a>
         </div>
-        <div class="home-title">
-            <h1 class="home-title-animation">
-                Ligh<span>Touch</span>
-            </h1>
-            <div class="home-title-buttons">
-                <a class="hidden home-title-btn" href="#" onclick="scrollToSection(page=1)">Le projet</a>
-                <a class="hidden home-title-btn" href="#" onclick="scrollToSection(page=2)">Qui sommes-nous ?</a>
-                <a class="hidden home-title-btn" href="#">Contact</a>
-            </div>
+    </div>
+    <div id="projectSection" class="section" style="color: #e6a733; display: none;">
+        <h2>Le Projet</h2>
+        <p>
+            LighTouch est une caméra intelligente conçue pour transformer n'importe quelle projection vidéo en un écran
+            tactile interactif.
+            Créé à l'origine comme un projet de fin d'études à EPITECH, LighTouch exploite l'analyse vidéo avancée et la
+            technologie Bluetooth pour permettre une interaction utilisateur intuitive et transparente.
+        </p>
+    </div>
+    <div id="aboutSection" class="section" style="color: #301D55; display: none;">
+        <h2>Qui sommes-nous ?</h2>
+        <p>
+        <table class="person-table">
+            <tr>
+                <td><a href="https://github.com/JeremyCMPro">Jérémy Calosso&#8288;&#8211;&#8288;Merlino</a></td>
+                <td>Scrum master</td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/Wohou">Benjamin Cottone</a></td>
+                <td>Responsable hardware</td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/HydraIix">Fabien Gelorse</a></td>
+                <td>Responsable IA</td>
+            </tr>
+            <tr>
+                <td><a href="https://tranchant.tech">Nathan Tranchant</a></td>
+                <td>Responsable software</td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/Arnaudvitale">Arnaud Vitale</a></td>
+                <td>Design et communication</td>
+            </tr>
+        </table>
+        </p>
+    </div>
+    <div id="contactSection" class="section" style="color: #e6a733; display: none;">
+        <h2>Nous contacter</h2>
+        <p>
+            Une idée, une question, un commentaire ?
+            N'hésitez pas à nous contacter par mail à l'adresse
+            <a href="mailto:contact.lightouch@gmail.com">contact.lightouch@gmail.com</a>,
+            ou sur nos différents réseaux sociaux :
+        </p>
+        <div class="social-table">
+            <a href="https://www.linkedin.com/company/lightouchoff">
+                <img src="img/linkedin.svg" alt="Linkedin" width="40" height="40" />
+                <span>@lightouchoff</span>
+            </a>
+            <a href="https://www.instagram.com/lightouchoff/">
+                <img src="img/instagram.svg" alt="Instagram" width="40" height="40" />
+                <span>@lightouchoff</span>
+            </a>
+            <a href="https://github.com/LighTouchOrg">
+                <img src="img/github.svg" alt="Github" width="40" height="40" />
+                <span>@lightouchorg</span>
+            </a>
         </div>
-        <div id="projectSection" class="section" style="color: #e6a733; display: none;">
-            <h2>Le Projet</h2>
-            <p>
-                LighTouch est une caméra intelligente conçue pour transformer n'importe quelle projection vidéo en un écran tactile interactif.
-                Créé à l'origine comme un projet de fin d'études à EPITECH, LighTouch exploite l'analyse vidéo avancée et la technologie Bluetooth pour permettre une interaction utilisateur intuitive et transparente.
-            </p>
-        </div>
-        <div id="aboutSection" class="section" style="color: #301D55; display: none;">
-            <h2>Qui sommes-nous ?</h2>
-            <p>
-                <table class="person-table">
-                    <tr>
-                        <td><a href="https://github.com/JeremyCMPro">Jérémy Calosso&#8288;&#8211;&#8288;Merlino</a></td>
-                        <td>Scrum master</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/Wohou">Benjamin Cottone</a></td>
-                        <td>Responsable hardware</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/HydraIix">Fabien Gelorse</a></td>
-                        <td>Responsable IA</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://tranchant.tech">Nathan Tranchant</a></td>
-                        <td>Responsable software</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/Arnaudvitale">Arnaud Vitale</a></td>
-                        <td>Design et communication</td>
-                    </tr>
-                </table>
-            </p>
-        </div>
-    </body>
+    </div>
+</body>
+
 </html>

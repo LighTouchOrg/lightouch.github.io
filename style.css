@@ -60,7 +60,8 @@ body {
     }
 }
 
-p {
+p,
+p a {
     font-size: x-large;
 }
 
@@ -238,4 +239,27 @@ a {
 .person-table {
     border-collapse: separate;
     border-spacing: 2em 1em;
+}
+
+.social-table {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .social-table {
+        flex-direction: column;
+    }
+}
+
+.social-table a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
 }

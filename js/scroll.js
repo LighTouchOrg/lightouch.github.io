@@ -1,9 +1,11 @@
-const MAX_SCROLL = 2000;
+const MAX_SCROLL = 3000;
 const BUTTONS_Y = 15;
 const PAGE_1_Y = 500;
 const PAGE_1_END_Y = 1000;
 const PAGE_2_Y = 1500;
 const PAGE_2_END_Y = 2000;
+const PAGE_3_Y = 2500;
+const PAGE_3_END_Y = 3000;
 
 let scrollPosition = 0;
 let startY = 0;
@@ -11,8 +13,8 @@ let startY = 0;
 function checkVisibility() {
     let buttons = $('.home-title-btn').toArray();
 
-    if (scrollPosition >= PAGE_2_END_Y) $('.arrow').addClass('arrow-turned');
-    else $('.arrow').removeClass('arrow-turned');
+    if (scrollPosition >= MAX_SCROLL && !$('.arrow').hasClass('arrow-turned')) $('.arrow').addClass('arrow-turned');
+    else if ($('.arrow').hasClass('arrow-turned')) $('.arrow').removeClass('arrow-turned');
 
     if (scrollPosition >= BUTTONS_Y) buttons = buttons.reverse();
 
@@ -32,7 +34,10 @@ function checkVisibility() {
         }, delay);
     });
 
-    if (scrollPosition >= PAGE_2_Y) {
+    if (scrollPosition >= PAGE_3_Y) {
+        $('#contactSection').css('display', 'flex');
+        $('#contactSection h2').addClass('text-animation');
+    } else if (scrollPosition >= PAGE_2_Y) {
         $('#aboutSection').css('display', 'flex');
         $('#aboutSection h2').addClass('text-animation');
     } else if (scrollPosition >= PAGE_1_Y) {
@@ -43,6 +48,8 @@ function checkVisibility() {
         $('#projectSection h2').removeClass('text-animation');
         $('#aboutSection').css('display', 'none');
         $('#aboutSection h2').removeClass('text-animation');
+        $('#contactSection').css('display', 'none');
+        $('#contactSection h2').removeClass('text-animation');
     }
 }
 
@@ -55,6 +62,8 @@ function simulateScroll(event) {
                 scrollPosition += event.originalEvent.deltaY;
             } else if (scrollPosition <= PAGE_2_Y) {
                 scrollPosition = PAGE_1_END_Y + window.scrollY;
+            } else if (scrollPosition <= PAGE_3_Y) {
+                scrollPosition = PAGE_2_END_Y + window.scrollY;
             } else {
                 scrollPosition = PAGE_1_Y + window.scrollY;
             }
@@ -97,7 +106,8 @@ function scrollToNextSection() {
     if (scrollPosition < BUTTONS_Y) scrollPosition = BUTTONS_Y;
     else if (scrollPosition < PAGE_1_END_Y) scrollPosition = PAGE_1_END_Y;
     else if (scrollPosition < PAGE_2_END_Y) scrollPosition = PAGE_2_END_Y;
-    else if (scrollPosition >= PAGE_2_END_Y) scrollPosition = BUTTONS_Y;
+    else if (scrollPosition < PAGE_3_END_Y) scrollPosition = PAGE_3_END_Y;
+    else if (scrollPosition >= PAGE_3_END_Y) scrollPosition = BUTTONS_Y;
     else scrollPosition = 0;
     scrollTo(scrollPosition, original);
 }
@@ -107,7 +117,8 @@ function scrollToPreviousSection() {
     if (scrollPosition <= BUTTONS_Y) scrollPosition = 0;
     else if (scrollPosition <= PAGE_1_END_Y) scrollPosition = BUTTONS_Y;
     else if (scrollPosition <= PAGE_2_END_Y) scrollPosition = PAGE_1_END_Y;
-    else if (scrollPosition > PAGE_2_END_Y) scrollPosition = PAGE_2_END_Y;
+    else if (scrollPosition <= PAGE_3_END_Y) scrollPosition = PAGE_2_END_Y;
+    else if (scrollPosition > PAGE_3_END_Y) scrollPosition = PAGE_3_END_Y;
     scrollTo(scrollPosition, original);
 }
 
@@ -119,6 +130,9 @@ function scrollToSection(page) {
             break;
         case 2:
             scrollPosition = PAGE_2_END_Y;
+            break;
+        case 3:
+            scrollPosition = PAGE_3_END_Y;
             break;
     }
     // unfocus all buttons & as
