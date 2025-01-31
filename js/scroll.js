@@ -73,7 +73,7 @@ function simulateScroll(event) {
         case 'touchmove':
             const currentY = event.originalEvent.touches[0].clientY;
             // Directly set scrollPosition based on touch movement
-            scrollPosition = startY - currentY + initialScrollPosition; // initialScrollPosition is where the scroll started
+            scrollPosition = scrollPosition + (startY - currentY);
             startY = currentY; // Update startY for continuous scrolling
             break;
     }
